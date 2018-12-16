@@ -16,17 +16,22 @@ public class Photo {
     // 当高清图加载完成后，如果原图，会显示【查看原图】按钮
     var rawUrl = ""
     
-    var image: UIImage!
+    // 记录当前是否需要显示查看原图按钮
+    var isRawButtonVisible = false
     
+    // 记录当前是否需要显示保存按钮
+    var isSaveButtonVisible = false
+    
+    // 记录是否加载过原图
+    var isRawPhotoLoaded = false
+    
+    // 记录当前的缩放值
+    var scale: CGFloat = 1
+
     public init(thumbnailUrl: String, highQualityUrl: String, rawUrl: String) {
         self.thumbnailUrl = thumbnailUrl
         self.highQualityUrl = highQualityUrl
         self.rawUrl = rawUrl
     }
-    
-    public convenience init(image: UIImage) {
-        self.init(thumbnailUrl: "", highQualityUrl: "", rawUrl: "")
-        self.image = image
-    }
-    
+
 }
