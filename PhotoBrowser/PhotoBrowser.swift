@@ -35,11 +35,11 @@ public class PhotoBrowser: UIView {
     private lazy var dotIndicator: DotIndicator = {
         
         let view = DotIndicator()
-        view.color = configuration.dotIndicatorColor
-        view.activeColor = configuration.dotIndicatorActiveColor
+        view.color = configuration.dotIndicatorColorNormal
+        view.activeColor = configuration.dotIndicatorColorActive
         view.gap = configuration.dotIndicatorGap
-        view.radius = configuration.dotIndicatorRadius
-        view.activeRadius = configuration.dotIndicatorActiveRadius
+        view.radius = configuration.dotIndicatorRadiusNormal
+        view.activeRadius = configuration.dotIndicatorRadiusActive
         
         view.isHidden = true
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -130,13 +130,21 @@ public class PhotoBrowser: UIView {
     
     public var photos = [Photo]() {
         didSet {
-            dotIndicator.count = photos.count
-            numberIndicator.count = photos.count
+            
+            let count = photos.count
+            
+            dotIndicator.count = count
+            numberIndicator.count = count
             collectionView.reloadData()
             
-            if photos.count > index {
-                collectionView.scrollToItem(at: IndexPath(item: index, section: 0), at: .left, animated: false)
+            if index >= 0 && index < count {
+                correctIndex()
+                updateStatus(photo: photos[index])
             }
+            else {
+                hideIndicator()
+            }
+            
         }
     }
     
@@ -146,14 +154,9 @@ public class PhotoBrowser: UIView {
             dotIndicator.index = index
             numberIndicator.index = index
 
-            if photos.count > index {
-                
-                if index != getActualIndex() {
-                    collectionView.scrollToItem(at: IndexPath(item: index, section: 0), at: .left, animated: false)
-                }
-                
+            if index >= 0 && index < photos.count {
+                correctIndex()
                 updateStatus(photo: photos[index])
-                
             }
             
         }
@@ -198,6 +201,7 @@ public class PhotoBrowser: UIView {
         flowLayout.itemSize = size
         collectionView.frame.size = CGSize(width: size.width + pageMargin, height: size.height)
         flowLayout.invalidateLayout()
+        correctIndex()
     }
 
 }
@@ -210,28 +214,27 @@ extension PhotoBrowser: UICollectionViewDataSource {
     
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as! PhotoPage
-        let onUpdate: (Photo) -> Void = { photo in
-            guard self.isCurrentPhoto(photo) else {
-                return
+        let onPageUpdate: (Photo) -> Void = { photo in
+            if self.isCurrentPhoto(photo) {
+                self.updateStatus(photo: photo)
             }
-            self.updateStatus(photo: photo)
         }
-        cell.onScaleChange = onUpdate
-        cell.onLoadStart = onUpdate
-        cell.onLoadEnd = onUpdate
-        cell.onDragStart = onUpdate
-        cell.onDragEnd = onUpdate
+        cell.onScaleChange = onPageUpdate
+        cell.onLoadStart = onPageUpdate
+        cell.onLoadEnd = onPageUpdate
+        cell.onDragStart = onPageUpdate
+        cell.onDragEnd = onPageUpdate
         cell.onTap = { photo in
             self.delegate.photoBrowserDidTap(photo: photo)
         }
         cell.onLongPress = { photo in
             self.delegate.photoBrowserDidLongPress(photo: photo)
         }
-        cell.onSaveComplete = { photo, success in
+        cell.onSave = { photo, success in
             if !success {
                 self.saveButton.isHidden = false
             }
-            self.delegate.photoBrowserSavePhotoComplete(photo: photo, success: success)
+            self.delegate.photoBrowserDidSave(photo: photo, success: success)
         }
         cell.update(photo: photos[indexPath.item], configuration: configuration)
         return cell
@@ -249,6 +252,12 @@ extension PhotoBrowser: UICollectionViewDelegate {
 
 extension PhotoBrowser {
  
+    private func correctIndex() {
+        if index != getActualIndex() {
+            collectionView.scrollToItem(at: IndexPath(item: index, section: 0), at: .left, animated: false)
+        }
+    }
+    
     private func getActualIndex() -> Int {
         return Int(round(collectionView.contentOffset.x / collectionView.bounds.width))
     }

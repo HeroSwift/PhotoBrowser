@@ -11,19 +11,19 @@ open class PhotoBrowserConfiguration {
     public var dotIndicatorMarginBottom: CGFloat = 20
 
     // 斑点指示器非当前位置的颜色
-    public var dotIndicatorColor = UIColor(red: 210 / 255, green: 210 / 255, blue: 210 / 255, alpha: 0.8)
+    public var dotIndicatorColorNormal = UIColor(red: 210 / 255, green: 210 / 255, blue: 210 / 255, alpha: 0.8)
     
     // 斑点指示器当前位置的颜色
-    public var dotIndicatorActiveColor = UIColor(red: 255, green: 255, blue: 255, alpha: 0.8)
+    public var dotIndicatorColorActive = UIColor(red: 255, green: 255, blue: 255, alpha: 0.8)
     
     // 斑点指示器两点之间的距离
     public var dotIndicatorGap = 4.0
     
     // 斑点指示器非当前位置的半径
-    public var dotIndicatorRadius = 2.7
+    public var dotIndicatorRadiusNormal = 2.7
     
     // 斑点指示器当前位置的半径
-    public var dotIndicatorActiveRadius = 3.0
+    public var dotIndicatorRadiusActive = 3.0
     
     // 数字指示器到底部的距离
     public var numberIndicatorMarginBottom: CGFloat = 15

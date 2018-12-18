@@ -17,7 +17,7 @@ class PhotoPage: UICollectionViewCell {
     
     var onDragEnd: ((Photo) -> Void)?
     
-    var onSaveComplete: ((Photo, Bool) -> Void)?
+    var onSave: ((Photo, Bool) -> Void)?
 
     private lazy var photoView: PhotoView = {
         let view = PhotoView()
@@ -116,7 +116,7 @@ class PhotoPage: UICollectionViewCell {
             onLoadStart: { hasProgress in
                 self.onLoadStart(url: url, hasProgress: hasProgress)
             }, onLoadProgress: { loaded, total in
-                self.onLoadProgress(url: url, loaded: loaded, total: total)
+                self.onLoadProgress(loaded: loaded, total: total)
             }, onLoadEnd: { success in
                 self.onLoadEnd(url: url, success: success)
             }
@@ -143,7 +143,7 @@ class PhotoPage: UICollectionViewCell {
         
     }
     
-    private func onLoadProgress(url: String, loaded: Int64, total: Int64) {
+    private func onLoadProgress(loaded: Int64, total: Int64) {
         
         guard normalSpinner.isHidden else {
             return
@@ -185,7 +185,7 @@ class PhotoPage: UICollectionViewCell {
     }
     
     @objc private func onSaveEnd(image: UIImage, didFinishSavingWithError error: NSError?, contextInfo: AnyObject) {
-        onSaveComplete?(photo, error == nil)
+        onSave?(photo, error == nil)
     }
 
 }

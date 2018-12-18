@@ -143,7 +143,7 @@ extension PhotoView {
             scale = min(widthScale, heightScale)
         }
 
-        scrollView.maximumZoomScale = 3 * scale
+        scrollView.maximumZoomScale = 3 * scale < 1 ? 1 : (3 * scale)
         scrollView.minimumZoomScale = scale
         scrollView.zoomScale = scale
         

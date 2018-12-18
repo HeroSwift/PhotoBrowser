@@ -96,7 +96,7 @@ extension PhotoBrowserController: PhotoBrowserDelegate {
         
     }
     
-    public func photoBrowserSavePhotoComplete(photo: Photo, success: Bool) {
+    public func photoBrowserDidSave(photo: Photo, success: Bool) {
         
         if success {
             tipLabel.text = "保存成功"
