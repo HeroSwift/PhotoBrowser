@@ -64,13 +64,13 @@ public class PhotoBrowserController: UIViewController {
         
         
         tipLabel.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.6)
-        tipLabel.layer.cornerRadius = 8
+        tipLabel.layer.cornerRadius = 6
         tipLabel.clipsToBounds = true
         
         tipLabel.textAlignment = .center
         tipLabel.isHidden = true
         tipLabel.textColor = .white
-        tipLabel.font = UIFont.systemFont(ofSize: 14)
+        tipLabel.font = UIFont.systemFont(ofSize: 12)
         tipLabel.translatesAutoresizingMaskIntoConstraints = false
         
         view.addSubview(tipLabel)
@@ -78,8 +78,8 @@ public class PhotoBrowserController: UIViewController {
         view.addConstraints([
             NSLayoutConstraint(item: tipLabel, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: 0),
             NSLayoutConstraint(item: tipLabel, attribute: .centerY, relatedBy: .equal, toItem: view, attribute: .centerY, multiplier: 1, constant: 0),
-            NSLayoutConstraint(item: tipLabel, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .width, multiplier: 1, constant: 100),
-            NSLayoutConstraint(item: tipLabel, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1, constant: 40)
+            NSLayoutConstraint(item: tipLabel, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .width, multiplier: 1, constant: 80),
+            NSLayoutConstraint(item: tipLabel, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1, constant: 30)
         ])
         
     }
@@ -108,7 +108,7 @@ extension PhotoBrowserController: PhotoBrowserDelegate {
         tipLabel.isHidden = false
         tipLabel.alpha = 0
         
-        UIView.animateKeyframes(withDuration: 3, delay: 0, options: .calculationModeLinear, animations: {
+        UIView.animateKeyframes(withDuration: 2.5, delay: 0, options: .calculationModeLinear, animations: {
             
             // 淡入
             UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.05, animations: {

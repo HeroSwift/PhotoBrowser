@@ -16,7 +16,6 @@ public class PhotoBrowser: UIView {
         view.register(PhotoPage.self, forCellWithReuseIdentifier: cellIdentifier)
         view.dataSource = self
         view.delegate = self
-        view.backgroundColor = configuration.backgroundColor
         
         addSubview(view)
         
@@ -36,12 +35,18 @@ public class PhotoBrowser: UIView {
     private lazy var dotIndicator: DotIndicator = {
         
         let view = DotIndicator()
+        view.color = configuration.dotIndicatorColor
+        view.activeColor = configuration.dotIndicatorActiveColor
+        view.gap = configuration.dotIndicatorGap
+        view.radius = configuration.dotIndicatorRadius
+        view.activeRadius = configuration.dotIndicatorActiveRadius
+        
         view.isHidden = true
         view.translatesAutoresizingMaskIntoConstraints = false
         
         addSubview(view)
         addConstraints([
-            NSLayoutConstraint(item: view, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 1, constant: -configuration.indicatorMarginBottom),
+            NSLayoutConstraint(item: view, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 1, constant: -configuration.dotIndicatorMarginBottom),
             NSLayoutConstraint(item: view, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1, constant: 0)
         ])
         
@@ -52,12 +57,17 @@ public class PhotoBrowser: UIView {
     private lazy var numberIndicator: NumberIndicator = {
         
         let view = NumberIndicator()
+        view.separator = configuration.numberIndicatorSeparator
+        view.gap = configuration.numberIndicatorGap
+        view.textSize = configuration.numberIndicatorTextSize
+        view.textColor = configuration.numberIndicatorTextColor
+        
         view.isHidden = true
         view.translatesAutoresizingMaskIntoConstraints = false
         
         addSubview(view)
         addConstraints([
-            NSLayoutConstraint(item: view, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 1, constant: -configuration.indicatorMarginBottom),
+            NSLayoutConstraint(item: view, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 1, constant: -configuration.numberIndicatorMarginBottom),
             NSLayoutConstraint(item: view, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1, constant: 0)
         ])
         
@@ -178,6 +188,8 @@ public class PhotoBrowser: UIView {
     public convenience init(configuration: PhotoBrowserConfiguration) {
         self.init()
         self.configuration = configuration
+        // 在这先访问 collectionView，确保它是第一个创建
+        collectionView.backgroundColor = configuration.backgroundColor
     }
     
     public override func layoutSubviews() {
@@ -238,7 +250,7 @@ extension PhotoBrowser: UICollectionViewDelegate {
 extension PhotoBrowser {
  
     private func getActualIndex() -> Int {
-        return Int(collectionView.contentOffset.x / collectionView.bounds.width)
+        return Int(round(collectionView.contentOffset.x / collectionView.bounds.width))
     }
     
     private func getCurrentPage() -> PhotoPage {

@@ -7,8 +7,38 @@ open class PhotoBrowserConfiguration {
     // 背景色
     public var backgroundColor = UIColor.black
     
-    // 页码指示器到底部的距离
-    public var indicatorMarginBottom: CGFloat = 20
+    // 斑点指示器到底部的距离
+    public var dotIndicatorMarginBottom: CGFloat = 20
+
+    // 斑点指示器非当前位置的颜色
+    public var dotIndicatorColor = UIColor(red: 210 / 255, green: 210 / 255, blue: 210 / 255, alpha: 0.8)
+    
+    // 斑点指示器当前位置的颜色
+    public var dotIndicatorActiveColor = UIColor(red: 255, green: 255, blue: 255, alpha: 0.8)
+    
+    // 斑点指示器两点之间的距离
+    public var dotIndicatorGap = 4.0
+    
+    // 斑点指示器非当前位置的半径
+    public var dotIndicatorRadius = 2.7
+    
+    // 斑点指示器当前位置的半径
+    public var dotIndicatorActiveRadius = 3.0
+    
+    // 数字指示器到底部的距离
+    public var numberIndicatorMarginBottom: CGFloat = 15
+    
+    // 数字指示器分隔符
+    public var numberIndicatorSeparator = "/"
+    
+    // 数字指示器分隔符与数字的距离
+    public var numberIndicatorGap: CGFloat = 4.0
+    
+    // 数字指示器文本颜色
+    public var numberIndicatorTextColor = UIColor(red: 255, green: 255, blue: 255, alpha: 0.8)
+    
+    // 数字指示器文本大小
+    public var numberIndicatorTextSize: CGFloat = 14
     
     // 查看原图按钮的标题
     public var rawButtonImage = UIImage(named: "photo_browser_raw")
@@ -24,6 +54,7 @@ open class PhotoBrowserConfiguration {
     
     // 保存按钮到右边的距离
     public var saveButtonMarginRight: CGFloat = 20
+
     
     
     public init() { }
