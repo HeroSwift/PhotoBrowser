@@ -14,7 +14,7 @@
 		9D1EDDDB21C1316800DB3357 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D1EDDD921C1316800DB3357 /* LaunchScreen.storyboard */; };
 		9D1EDDE221C131FD00DB3357 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D1EDDE121C131FD00DB3357 /* Photo.swift */; };
 		9D1EDE5421C3674D00DB3357 /* PhotoBrowser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D1EDE5321C3674D00DB3357 /* PhotoBrowser.swift */; };
-		9D1EDE5621C3804C00DB3357 /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D1EDE5521C3804C00DB3357 /* PhotoCell.swift */; };
+		9D1EDE5621C3804C00DB3357 /* PhotoPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D1EDE5521C3804C00DB3357 /* PhotoPage.swift */; };
 		9D68104F21C54BE100F3040E /* DotIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D68104D21C54BE100F3040E /* DotIndicator.swift */; };
 		9D68105421C54BEB00F3040E /* NumberIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D68105221C54BEB00F3040E /* NumberIndicator.swift */; };
 		9D68105921C54BF900F3040E /* CircleSpinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D68105721C54BF900F3040E /* CircleSpinner.swift */; };
@@ -24,6 +24,7 @@
 		9D68106421C6279B00F3040E /* Kingfisher.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9D68106221C6279A00F3040E /* Kingfisher.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9D68106921C676D600F3040E /* SimpleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D68106721C676D600F3040E /* SimpleButton.swift */; };
 		9D68106C21C68ABA00F3040E /* PhotoBrowserDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D68106B21C68ABA00F3040E /* PhotoBrowserDelegate.swift */; };
+		9DFFAA7D21C899A600A073EF /* PhotoBrowserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DFFAA7C21C899A600A073EF /* PhotoBrowserController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,7 +63,7 @@
 		9D1EDDDC21C1316800DB3357 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9D1EDDE121C131FD00DB3357 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		9D1EDE5321C3674D00DB3357 /* PhotoBrowser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoBrowser.swift; sourceTree = "<group>"; };
-		9D1EDE5521C3804C00DB3357 /* PhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
+		9D1EDE5521C3804C00DB3357 /* PhotoPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPage.swift; sourceTree = "<group>"; };
 		9D68104D21C54BE100F3040E /* DotIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DotIndicator.swift; sourceTree = "<group>"; };
 		9D68105221C54BEB00F3040E /* NumberIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberIndicator.swift; sourceTree = "<group>"; };
 		9D68105721C54BF900F3040E /* CircleSpinner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleSpinner.swift; sourceTree = "<group>"; };
@@ -71,6 +72,7 @@
 		9D68106221C6279A00F3040E /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = Carthage/Build/iOS/Kingfisher.framework; sourceTree = "<group>"; };
 		9D68106721C676D600F3040E /* SimpleButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleButton.swift; sourceTree = "<group>"; };
 		9D68106B21C68ABA00F3040E /* PhotoBrowserDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoBrowserDelegate.swift; sourceTree = "<group>"; };
+		9DFFAA7C21C899A600A073EF /* PhotoBrowserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoBrowserController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +127,7 @@
 				9D1EDE5321C3674D00DB3357 /* PhotoBrowser.swift */,
 				9D68106021C624F500F3040E /* PhotoBrowserConfiguration.swift */,
 				9D68106B21C68ABA00F3040E /* PhotoBrowserDelegate.swift */,
+				9DFFAA7C21C899A600A073EF /* PhotoBrowserController.swift */,
 			);
 			path = PhotoBrowser;
 			sourceTree = "<group>";
@@ -153,7 +156,7 @@
 		9D1EDDE321C133DC00DB3357 /* view */ = {
 			isa = PBXGroup;
 			children = (
-				9D1EDE5521C3804C00DB3357 /* PhotoCell.swift */,
+				9D1EDE5521C3804C00DB3357 /* PhotoPage.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -313,11 +316,12 @@
 			files = (
 				9D68106C21C68ABA00F3040E /* PhotoBrowserDelegate.swift in Sources */,
 				9D68106121C624F500F3040E /* PhotoBrowserConfiguration.swift in Sources */,
-				9D1EDE5621C3804C00DB3357 /* PhotoCell.swift in Sources */,
+				9D1EDE5621C3804C00DB3357 /* PhotoPage.swift in Sources */,
 				9D68104F21C54BE100F3040E /* DotIndicator.swift in Sources */,
 				9D68105921C54BF900F3040E /* CircleSpinner.swift in Sources */,
 				9D68105421C54BEB00F3040E /* NumberIndicator.swift in Sources */,
 				9D1EDDE221C131FD00DB3357 /* Photo.swift in Sources */,
+				9DFFAA7D21C899A600A073EF /* PhotoBrowserController.swift in Sources */,
 				9D1EDE5421C3674D00DB3357 /* PhotoBrowser.swift in Sources */,
 				9D68105E21C54C1800F3040E /* PhotoView.swift in Sources */,
 				9D68106921C676D600F3040E /* SimpleButton.swift in Sources */,

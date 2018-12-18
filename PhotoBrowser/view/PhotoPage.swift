@@ -1,7 +1,7 @@
 
 import UIKit
 
-class PhotoCell: UICollectionViewCell {
+class PhotoPage: UICollectionViewCell {
     
     var onTap: ((Photo) -> Void)?
     
@@ -9,7 +9,13 @@ class PhotoCell: UICollectionViewCell {
     
     var onScaleChange: ((Photo) -> Void)?
     
-    var onLoadComplete: ((Photo) -> Void)?
+    var onLoadStart: ((Photo) -> Void)?
+    
+    var onLoadEnd: ((Photo) -> Void)?
+    
+    var onDragStart: ((Photo) -> Void)?
+    
+    var onDragEnd: ((Photo) -> Void)?
     
     var onSaveComplete: ((Photo, Bool) -> Void)?
 
@@ -25,6 +31,14 @@ class PhotoCell: UICollectionViewCell {
             self.photo.scale = scale
             self.onScaleChange?(self.photo)
         }
+        view.onDragStart = {
+            self.photo.isDragging = true
+            self.onDragStart?(self.photo)
+        }
+        view.onDragEnd = {
+            self.photo.isDragging = false
+            self.onDragEnd?(self.photo)
+        }
         view.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(view)
         contentView.addConstraints([
@@ -38,6 +52,7 @@ class PhotoCell: UICollectionViewCell {
     
     private lazy var circleSpinner: CircleSpinner = {
         let view = CircleSpinner()
+        view.isHidden = true
         view.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(view)
         contentView.addConstraints([
@@ -49,6 +64,7 @@ class PhotoCell: UICollectionViewCell {
     
     private lazy var normalSpinner: UIActivityIndicatorView = {
         let view = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.whiteLarge)
+        view.isHidden = true
         view.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(view)
         contentView.addConstraints([
@@ -112,13 +128,18 @@ class PhotoCell: UICollectionViewCell {
         
         if hasProgress {
             circleSpinner.isHidden = false
-            normalSpinner.isHidden = true
         }
         else {
-            circleSpinner.isHidden = true
             normalSpinner.isHidden = false
             normalSpinner.startAnimating()
         }
+        
+        if url == photo.rawUrl {
+            photo.isRawButtonVisible = false
+        }
+        photo.isSaveButtonVisible = false
+        
+        onLoadStart?(photo)
         
     }
     
@@ -155,15 +176,16 @@ class PhotoCell: UICollectionViewCell {
             photo.isSaveButtonVisible = true
             loadedUrl = url
         }
-        else if hasRawUrl && url == self.photo.rawUrl {
+        else if hasRawUrl && url == photo.rawUrl {
             photo.isRawButtonVisible = true
         }
         
-        onLoadComplete?(photo)
+        onLoadEnd?(photo)
+        
     }
     
     @objc private func onSaveEnd(image: UIImage, didFinishSavingWithError error: NSError?, contextInfo: AnyObject) {
-        onSaveComplete?(photo, error != nil)
+        onSaveComplete?(photo, error == nil)
     }
 
 }

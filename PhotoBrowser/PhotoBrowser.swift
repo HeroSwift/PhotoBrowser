@@ -13,7 +13,7 @@ public class PhotoBrowser: UIView {
         view.showsVerticalScrollIndicator = false
         view.showsHorizontalScrollIndicator = false
         
-        view.register(PhotoCell.self, forCellWithReuseIdentifier: cellIdentifier)
+        view.register(PhotoPage.self, forCellWithReuseIdentifier: cellIdentifier)
         view.dataSource = self
         view.delegate = self
         view.backgroundColor = configuration.backgroundColor
@@ -74,7 +74,7 @@ public class PhotoBrowser: UIView {
         view.translatesAutoresizingMaskIntoConstraints = false
         
         view.onClick = {
-            self.getCurrentCell().loadRawPhoto(configuration: self.configuration)
+            self.getCurrentPage().loadRawPhoto(configuration: self.configuration)
         }
         
         addSubview(view)
@@ -98,7 +98,7 @@ public class PhotoBrowser: UIView {
         
         view.onClick = {
             self.saveButton.isHidden = true
-            self.getCurrentCell().savePhoto()
+            self.getCurrentPage().savePhoto()
         }
         
         addSubview(view)
@@ -123,6 +123,10 @@ public class PhotoBrowser: UIView {
             dotIndicator.count = photos.count
             numberIndicator.count = photos.count
             collectionView.reloadData()
+            
+            if photos.count > index {
+                collectionView.scrollToItem(at: IndexPath(item: index, section: 0), at: .left, animated: false)
+            }
         }
     }
     
@@ -132,11 +136,15 @@ public class PhotoBrowser: UIView {
             dotIndicator.index = index
             numberIndicator.index = index
 
-            if index != getActualIndex() {
-                collectionView.scrollToItem(at: IndexPath(item: index, section: 0), at: .left, animated: false)
+            if photos.count > index {
+                
+                if index != getActualIndex() {
+                    collectionView.scrollToItem(at: IndexPath(item: index, section: 0), at: .left, animated: false)
+                }
+                
+                updateStatus(photo: photos[index])
+                
             }
-            
-            updateStatus(photo: photos[index])
             
         }
     }
@@ -174,8 +182,10 @@ public class PhotoBrowser: UIView {
     
     public override func layoutSubviews() {
         super.layoutSubviews()
-        flowLayout.itemSize = bounds.size
-        collectionView.frame.size = CGSize(width: bounds.width + pageMargin, height: bounds.height)
+        let size = bounds.size
+        flowLayout.itemSize = size
+        collectionView.frame.size = CGSize(width: size.width + pageMargin, height: size.height)
+        flowLayout.invalidateLayout()
     }
 
 }
@@ -187,18 +197,23 @@ extension PhotoBrowser: UICollectionViewDataSource {
     }
     
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as! PhotoCell
-        cell.onScaleChange = { photo in
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as! PhotoPage
+        let onUpdate: (Photo) -> Void = { photo in
             guard self.isCurrentPhoto(photo) else {
                 return
             }
             self.updateStatus(photo: photo)
         }
-        cell.onLoadComplete = { photo in
-            guard self.isCurrentPhoto(photo) else {
-                return
-            }
-            self.updateStatus(photo: photo)
+        cell.onScaleChange = onUpdate
+        cell.onLoadStart = onUpdate
+        cell.onLoadEnd = onUpdate
+        cell.onDragStart = onUpdate
+        cell.onDragEnd = onUpdate
+        cell.onTap = { photo in
+            self.delegate.photoBrowserDidTap(photo: photo)
+        }
+        cell.onLongPress = { photo in
+            self.delegate.photoBrowserDidLongPress(photo: photo)
         }
         cell.onSaveComplete = { photo, success in
             if !success {
@@ -226,8 +241,8 @@ extension PhotoBrowser {
         return Int(collectionView.contentOffset.x / collectionView.bounds.width)
     }
     
-    private func getCurrentCell() -> PhotoCell {
-        return collectionView.cellForItem(at: IndexPath(item: index, section: 0)) as! PhotoCell
+    private func getCurrentPage() -> PhotoPage {
+        return collectionView.cellForItem(at: IndexPath(item: index, section: 0)) as! PhotoPage
     }
     
     private func isCurrentPhoto(_ photo: Photo) -> Bool {
@@ -238,12 +253,14 @@ extension PhotoBrowser {
     }
     
     private func updateStatus(photo: Photo) {
-        rawButton.isHidden = !photo.isRawButtonVisible
-        saveButton.isHidden = !photo.isSaveButtonVisible
-        if photo.scale > 1 {
+        if photo.isDragging {
+            rawButton.isHidden = true
+            saveButton.isHidden = true
             hideIndicator()
         }
         else {
+            rawButton.isHidden = !photo.isRawButtonVisible
+            saveButton.isHidden = !photo.isSaveButtonVisible
             showIndicator()
         }
     }

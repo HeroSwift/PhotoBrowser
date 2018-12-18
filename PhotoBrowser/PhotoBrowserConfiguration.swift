@@ -5,7 +5,7 @@ import UIKit
 open class PhotoBrowserConfiguration {
     
     // 背景色
-    public var backgroundColor = UIColor.clear
+    public var backgroundColor = UIColor.black
     
     // 页码指示器到底部的距离
     public var indicatorMarginBottom: CGFloat = 20

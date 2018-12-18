@@ -25,6 +25,9 @@ public class Photo {
     // 记录是否加载过原图
     var isRawPhotoLoaded = false
     
+    // 记录当前是否正在拖拽
+    var isDragging = false
+    
     // 记录当前的缩放值
     var scale: CGFloat = 1
 
