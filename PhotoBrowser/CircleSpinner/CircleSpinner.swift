@@ -33,7 +33,8 @@ public class CircleSpinner: UIView {
     }
     
     public required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: aDecoder)
+        backgroundColor = .clear
     }
     
     public override func draw(_ rect: CGRect) {
