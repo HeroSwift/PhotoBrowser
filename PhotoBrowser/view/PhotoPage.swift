@@ -154,7 +154,7 @@ class PhotoPage: UICollectionViewCell {
     }
     
     private func onLoadEnd(url: String, success: Bool) {
-        
+
         if circleSpinner.isHidden {
             normalSpinner.stopAnimating()
             normalSpinner.isHidden = true
