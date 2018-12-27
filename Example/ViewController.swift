@@ -10,24 +10,27 @@ import UIKit
 import PhotoBrowser
 import Kingfisher
 
+
+import Photos
+
 class Configuration: PhotoBrowserConfiguration {
     
-    override func load(imageView: UIImageView, url: String, onLoadStart: @escaping (Bool) -> Void, onLoadProgress: @escaping (Int64, Int64) -> Void, onLoadEnd: @escaping (Bool) -> Void) {
+    override func load(imageView: UIImageView, url: String, onLoadStart: @escaping (Bool) -> Void, onLoadProgress: @escaping (Int, Int) -> Void, onLoadEnd: @escaping (UIImage?) -> Void) {
         let url = URL(string: url)
         onLoadStart(true)
         imageView.kf.setImage(
             with: url,
             options: [.forceRefresh],
             progressBlock: { receivedSize, totalSize in
-                onLoadProgress(receivedSize, totalSize)
+                onLoadProgress(Int(truncatingIfNeeded: receivedSize), Int(truncatingIfNeeded: totalSize))
             },
             completionHandler: { image, error, cacheType, imageURL in
                 if let error = error {
                     print(error)
-                    onLoadEnd(false)
+                    onLoadEnd(image)
                 }
                 else {
-                    onLoadEnd(true)
+                    onLoadEnd(image)
                 }
             }
         )
@@ -52,6 +55,26 @@ class Configuration: PhotoBrowserConfiguration {
         return false
         
     }
+    
+    override func save(url: String, image: UIImage, complete: @escaping (Bool) -> Void) {
+
+    
+        PHPhotoLibrary.shared().performChanges({
+            
+            let path = ImageCache.default.cachePath(forKey: url)
+            
+            guard let data = NSData(contentsOf: URL(fileURLWithPath: path)) else {
+                complete(false)
+                return
+            }
+            
+            PHAssetCreationRequest.forAsset().addResource(with: .photo, data: data as Data, options: nil)
+            
+        }, completionHandler: { success, error in
+            complete(success)
+        })
+
+    }
 }
 
 class ViewController: UIViewController {
@@ -67,7 +90,9 @@ class ViewController: UIViewController {
         Photo(thumbnailUrl: "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1544956463854&di=34c10544974f5457609f2a52b7885c3e&imgtype=0&src=http%3A%2F%2Ff.hiphotos.baidu.com%2Fzhidao%2Fpic%2Fitem%2Ffaf2b2119313b07eefa253db07d7912396dd8cc1.jpg", highQualityUrl: "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1544956463854&di=34c10544974f5457609f2a52b7885c3e&imgtype=0&src=http%3A%2F%2Ff.hiphotos.baidu.com%2Fzhidao%2Fpic%2Fitem%2Ffaf2b2119313b07eefa253db07d7912396dd8cc1.jpg", rawUrl: "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1544956463854&di=34c10544974f5457609f2a52b7885c3e&imgtype=0&src=http%3A%2F%2Ff.hiphotos.baidu.com%2Fzhidao%2Fpic%2Fitem%2Ffaf2b2119313b07eefa253db07d7912396dd8cc1.jpg"),
         
         // 1366*768
-        Photo(thumbnailUrl: "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1544956532057&di=6afd317a94ab8cafe5ce5aaaa69c2021&imgtype=0&src=http%3A%2F%2Fimg5.hao123.com%2Fdata%2Fdesktop%2F7c6a7c2871d4127170ea05bcd2002d18_1366_768", highQualityUrl: "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1544956532057&di=6afd317a94ab8cafe5ce5aaaa69c2021&imgtype=0&src=http%3A%2F%2Fimg5.hao123.com%2Fdata%2Fdesktop%2F7c6a7c2871d4127170ea05bcd2002d18_1366_768", rawUrl: "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1544956532057&di=6afd317a94ab8cafe5ce5aaaa69c2021&imgtype=0&src=http%3A%2F%2Fimg5.hao123.com%2Fdata%2Fdesktop%2F7c6a7c2871d4127170ea05bcd2002d18_1366_768")
+        Photo(thumbnailUrl: "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1544956532057&di=6afd317a94ab8cafe5ce5aaaa69c2021&imgtype=0&src=http%3A%2F%2Fimg5.hao123.com%2Fdata%2Fdesktop%2F7c6a7c2871d4127170ea05bcd2002d18_1366_768", highQualityUrl: "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1544956532057&di=6afd317a94ab8cafe5ce5aaaa69c2021&imgtype=0&src=http%3A%2F%2Fimg5.hao123.com%2Fdata%2Fdesktop%2F7c6a7c2871d4127170ea05bcd2002d18_1366_768", rawUrl: "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1544956532057&di=6afd317a94ab8cafe5ce5aaaa69c2021&imgtype=0&src=http%3A%2F%2Fimg5.hao123.com%2Fdata%2Fdesktop%2F7c6a7c2871d4127170ea05bcd2002d18_1366_768"),
+        
+        Photo(thumbnailUrl: "https://img.finstao.com/40b282e58c.gif", highQualityUrl: "https://img.finstao.com/40b282e58c.gif", rawUrl: "https://img.finstao.com/40b282e58c.gif")
     )
     
     @IBAction func onClick(_ sender: Any) {

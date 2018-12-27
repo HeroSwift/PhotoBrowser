@@ -18,6 +18,10 @@
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>222</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>111</string>
 	<key>NSPrincipalClass</key>
 	<string></string>
 </dict>
