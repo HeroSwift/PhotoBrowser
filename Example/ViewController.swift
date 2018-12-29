@@ -8,7 +8,7 @@
 
 import UIKit
 import PhotoBrowser
-import Kingfisher
+//import Kingfisher
 
 
 import Photos
@@ -18,22 +18,22 @@ class Configuration: PhotoBrowserConfiguration {
     override func load(imageView: UIImageView, url: String, onLoadStart: @escaping (Bool) -> Void, onLoadProgress: @escaping (Int, Int) -> Void, onLoadEnd: @escaping (UIImage?) -> Void) {
         let url = URL(string: url)
         onLoadStart(true)
-        imageView.kf.setImage(
-            with: url,
-            options: [.forceRefresh],
-            progressBlock: { receivedSize, totalSize in
-                onLoadProgress(Int(truncatingIfNeeded: receivedSize), Int(truncatingIfNeeded: totalSize))
-            },
-            completionHandler: { image, error, cacheType, imageURL in
-                if let error = error {
-                    print(error)
-                    onLoadEnd(image)
-                }
-                else {
-                    onLoadEnd(image)
-                }
-            }
-        )
+//        imageView.kf.setImage(
+//            with: url,
+//            options: [.forceRefresh],
+//            progressBlock: { receivedSize, totalSize in
+//                onLoadProgress(Int(truncatingIfNeeded: receivedSize), Int(truncatingIfNeeded: totalSize))
+//            },
+//            completionHandler: { image, error, cacheType, imageURL in
+//                if let error = error {
+//                    print(error)
+//                    onLoadEnd(image)
+//                }
+//                else {
+//                    onLoadEnd(image)
+//                }
+//            }
+//        )
     }
     
     override func isLoaded(url: String) -> Bool {
@@ -42,15 +42,15 @@ class Configuration: PhotoBrowserConfiguration {
             return false
         }
 
-        let cache = KingfisherManager.shared.cache
-        let result = cache.imageCachedType(forKey: url.cacheKey)
-        
-        switch result {
-        case .none:
-            break
-        default:
-            return false
-        }
+//        let cache = KingfisherManager.shared.cache
+//        let result = cache.imageCachedType(forKey: url.cacheKey)
+//
+//        switch result {
+//        case .none:
+//            break
+//        default:
+//            return false
+//        }
         
         return false
         
@@ -59,20 +59,20 @@ class Configuration: PhotoBrowserConfiguration {
     override func save(url: String, image: UIImage, complete: @escaping (Bool) -> Void) {
 
     
-        PHPhotoLibrary.shared().performChanges({
-            
-            let path = ImageCache.default.cachePath(forKey: url)
-            
-            guard let data = NSData(contentsOf: URL(fileURLWithPath: path)) else {
-                complete(false)
-                return
-            }
-            
-            PHAssetCreationRequest.forAsset().addResource(with: .photo, data: data as Data, options: nil)
-            
-        }, completionHandler: { success, error in
-            complete(success)
-        })
+//        PHPhotoLibrary.shared().performChanges({
+//            
+//            let path = ImageCache.default.cachePath(forKey: url)
+//            
+//            guard let data = NSData(contentsOf: URL(fileURLWithPath: path)) else {
+//                complete(false)
+//                return
+//            }
+//            
+//            PHAssetCreationRequest.forAsset().addResource(with: .photo, data: data as Data, options: nil)
+//            
+//        }, completionHandler: { success, error in
+//            complete(success)
+//        })
 
     }
 }

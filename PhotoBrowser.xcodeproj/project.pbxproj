@@ -21,8 +21,6 @@
 		9D38992421D10F7A00B4FECB /* NumberIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D38992221D10F7A00B4FECB /* NumberIndicator.swift */; };
 		9D38992E21D10FAC00B4FECB /* PhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D38992C21D10FAC00B4FECB /* PhotoView.swift */; };
 		9D68106121C624F500F3040E /* PhotoBrowserConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D68106021C624F500F3040E /* PhotoBrowserConfiguration.swift */; };
-		9D68106321C6279B00F3040E /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D68106221C6279A00F3040E /* Kingfisher.framework */; };
-		9D68106421C6279B00F3040E /* Kingfisher.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9D68106221C6279A00F3040E /* Kingfisher.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9D68106C21C68ABA00F3040E /* PhotoBrowserDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D68106B21C68ABA00F3040E /* PhotoBrowserDelegate.swift */; };
 		9DFFAA7D21C899A600A073EF /* PhotoBrowserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DFFAA7C21C899A600A073EF /* PhotoBrowserController.swift */; };
 /* End PBXBuildFile section */
@@ -36,20 +34,6 @@
 			remoteInfo = PhotoBrowser;
 		};
 /* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		9D68106521C6279B00F3040E /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				9D68106421C6279B00F3040E /* Kingfisher.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		9D1EDDBF21C1314F00DB3357 /* PhotoBrowser.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PhotoBrowser.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -70,7 +54,6 @@
 		9D38992221D10F7A00B4FECB /* NumberIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberIndicator.swift; sourceTree = "<group>"; };
 		9D38992C21D10FAC00B4FECB /* PhotoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoView.swift; sourceTree = "<group>"; };
 		9D68106021C624F500F3040E /* PhotoBrowserConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoBrowserConfiguration.swift; sourceTree = "<group>"; };
-		9D68106221C6279A00F3040E /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = Carthage/Build/iOS/Kingfisher.framework; sourceTree = "<group>"; };
 		9D68106B21C68ABA00F3040E /* PhotoBrowserDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoBrowserDelegate.swift; sourceTree = "<group>"; };
 		9DFFAA7C21C899A600A073EF /* PhotoBrowserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoBrowserController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -87,7 +70,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9D68106321C6279B00F3040E /* Kingfisher.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -97,7 +79,6 @@
 		9D1EDDB521C1314F00DB3357 = {
 			isa = PBXGroup;
 			children = (
-				9D68106221C6279A00F3040E /* Kingfisher.framework */,
 				9D1EDDC121C1314F00DB3357 /* PhotoBrowser */,
 				9D1EDDCF21C1316600DB3357 /* Example */,
 				9D1EDDC021C1314F00DB3357 /* Products */,
@@ -239,7 +220,6 @@
 				9D1EDDCA21C1316600DB3357 /* Sources */,
 				9D1EDDCB21C1316600DB3357 /* Frameworks */,
 				9D1EDDCC21C1316600DB3357 /* Resources */,
-				9D68106521C6279B00F3040E /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -511,7 +491,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -539,7 +519,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.finstao.PhotoBrowser;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -547,7 +527,6 @@
 		9D1EDDDE21C1316800DB3357 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = N276SVAZ33;
@@ -556,14 +535,14 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = Example/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.finstao.Example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -571,7 +550,6 @@
 		9D1EDDDF21C1316800DB3357 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = N276SVAZ33;
@@ -580,14 +558,14 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = Example/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.finstao.Example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
