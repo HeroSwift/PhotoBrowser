@@ -8,7 +8,6 @@
 
 import UIKit
 import PhotoBrowser
-//import Kingfisher
 
 
 import Photos
@@ -96,11 +95,13 @@ class ViewController: UIViewController {
     )
     
     @IBAction func onClick(_ sender: Any) {
-        PhotoBrowserController(configuration: Configuration(), indicator: .dot, pageMargin: 30).show(photos: photos, index: 1)
+        PhotoBrowserViewController(configuration: Configuration(), indicator: .dot, pageMargin: 30).show(photos: photos, index: 1)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
         // Do any additional setup after loading the view, typically from a nib.
     }
 
