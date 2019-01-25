@@ -116,11 +116,17 @@ class PhotoPage: UICollectionViewCell {
             imageView: photoView.imageView,
             url: url,
             onLoadStart: { hasProgress in
-                self.onLoadStart(url: url, hasProgress: hasProgress)
+                DispatchQueue.main.async {
+                    self.onLoadStart(url: url, hasProgress: hasProgress)
+                }
             }, onLoadProgress: { loaded, total in
-                self.onLoadProgress(loaded: loaded, total: total)
+                DispatchQueue.main.async {
+                    self.onLoadProgress(loaded: loaded, total: total)
+                }
             }, onLoadEnd: { image in
-                self.onLoadEnd(url: url, image: image)
+                DispatchQueue.main.async {
+                    self.onLoadEnd(url: url, image: image)
+                }
             }
         )
         
