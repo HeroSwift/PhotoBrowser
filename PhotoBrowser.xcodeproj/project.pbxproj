@@ -22,7 +22,6 @@
 		9D38992E21D10FAC00B4FECB /* PhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D38992C21D10FAC00B4FECB /* PhotoView.swift */; };
 		9D68106121C624F500F3040E /* PhotoBrowserConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D68106021C624F500F3040E /* PhotoBrowserConfiguration.swift */; };
 		9D68106C21C68ABA00F3040E /* PhotoBrowserDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D68106B21C68ABA00F3040E /* PhotoBrowserDelegate.swift */; };
-		9DFFAA7D21C899A600A073EF /* PhotoBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DFFAA7C21C899A600A073EF /* PhotoBrowserViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,7 +54,6 @@
 		9D38992C21D10FAC00B4FECB /* PhotoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoView.swift; sourceTree = "<group>"; };
 		9D68106021C624F500F3040E /* PhotoBrowserConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoBrowserConfiguration.swift; sourceTree = "<group>"; };
 		9D68106B21C68ABA00F3040E /* PhotoBrowserDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoBrowserDelegate.swift; sourceTree = "<group>"; };
-		9DFFAA7C21C899A600A073EF /* PhotoBrowserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoBrowserViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,7 +106,6 @@
 				9D1EDE5321C3674D00DB3357 /* PhotoBrowser.swift */,
 				9D68106021C624F500F3040E /* PhotoBrowserConfiguration.swift */,
 				9D68106B21C68ABA00F3040E /* PhotoBrowserDelegate.swift */,
-				9DFFAA7C21C899A600A073EF /* PhotoBrowserViewController.swift */,
 			);
 			path = PhotoBrowser;
 			sourceTree = "<group>";
@@ -301,7 +298,6 @@
 				9D1EDDE221C131FD00DB3357 /* Photo.swift in Sources */,
 				9D38992E21D10FAC00B4FECB /* PhotoView.swift in Sources */,
 				9D38991F21D10F7400B4FECB /* DotIndicator.swift in Sources */,
-				9DFFAA7D21C899A600A073EF /* PhotoBrowserViewController.swift in Sources */,
 				9D1EDE5421C3674D00DB3357 /* PhotoBrowser.swift in Sources */,
 				9D38992421D10F7A00B4FECB /* NumberIndicator.swift in Sources */,
 				9D38991A21D10F6D00B4FECB /* CircleSpinner.swift in Sources */,
